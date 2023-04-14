@@ -1,0 +1,26 @@
+.register-page {
+  display: flex;
+  padding-top: 100px;
+  justify-content: space-around;
+}
+
+img {
+  object-fit: cover;
+}
+
+@media screen and (min-width: 968px) and (max-width: 1264px) {
+  img {
+    // display: none;
+  }
+  .register-page {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+@media screen and (min-width: 200px) and (max-width: 968px) {
+  .register-page {
+    display: flex;
+    justify-content: center;
+  }
+}

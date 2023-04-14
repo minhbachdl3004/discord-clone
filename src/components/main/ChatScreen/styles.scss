@@ -1,0 +1,27 @@
+/* Set the height and line-height to match an input */
+.react-quill {
+  height: 2rem;
+  line-height: 2rem;
+}
+
+/* Remove the border and padding */
+.react-quill .ql-container,
+.react-quill .ql-editor {
+  border: none;
+  padding: 0;
+}
+
+.ql-container.ql-snow{ border: none !important;}
+
+/* Remove the background and cursor */
+.ql-editor.ql-blank {
+  color: white;
+  cursor: text;
+}
+
+/* Add focus styles */
+.react-quill .ql-editor:focus,
+.react-quill .ql-placeholder:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+}

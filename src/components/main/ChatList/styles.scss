@@ -1,0 +1,12 @@
+
+
+
+/* Hide the scrollbar by default */
+.scrollable-container::-webkit-scrollbar {
+  overflow-y: scroll
+}
+
+/* Show the scrollbar when the content is taller than the container */
+.scrollable-container.show-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}

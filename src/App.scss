@@ -1,0 +1,73 @@
+@tailwind utilities;
+
+#root {
+  min-width: 960px;
+  text-align: center;
+}
+
+@layer utilities {
+  .animation-delay-200 {
+    animation-delay: 0.2s;
+  }
+  .animation-delay-400 {
+    animation-delay: 0.4s;
+  }
+}
+
+.dot {
+  @apply w-2 h-2 my-12 mx-1 bg-white rounded-full;
+}
+
+.opacity-custom {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  box-sizing: border-box;
+  font-family: "gg sans", "Helvetica Neue", Helvetica, Arial, "Noto Sans", sans-serif;
+  font-size: 62.5%;
+  font-size: 10px;
+  overflow-x: hidden;
+}
+
+.container__home-page {
+  background-image: url("../src/assets/images/bg_image.jpg");
+  min-height: 380px;
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+
+.loader div {
+  animation-duration: 0.5s;
+}
+
+.loader div:first-child {
+  animation-delay: 0.1s;
+}
+
+.loader div:nth-child(2) {
+  animation-delay: 0.3s;
+}
+
+.loader div:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
