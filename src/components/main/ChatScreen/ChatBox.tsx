@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { io } from "socket.io-client";
 import useUserStore from "@/store/userStore";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { axiosInstance } from "@/configs/axios";
 import { continueMessage } from "@/configs/ContinueMessage";
 import { dividerForNewMessage } from "@/configs/Divider";
@@ -30,6 +30,7 @@ interface ChatBoxProps {
 }
 
 const ChatBox = ({ senderId, recipientId, status }: ChatBoxProps) => {
+  const navigate = useNavigate()
   const { conversationId } = useParams();
   const [message, setMessage] = useState<ChatMessageProps>({
     _id: "",
@@ -135,13 +136,14 @@ const ChatBox = ({ senderId, recipientId, status }: ChatBoxProps) => {
       try {
         setLoading(true);
         const { data } = await axiosInstance.get(
-          `/message/conversation/${conversationId}?page=1`
+          `/message/conversation/${conversationId}/user=${user.id}?page=1`
         );
         socketRef.current.emit("join room", conversationId);
         setMessages(data.messages.reverse());
         setTotalPages(data?.pagination.totalPages);
       } catch (error) {
         console.log(error);
+        navigate('/channels/@me')
       }
       setLoading(false);
     };
@@ -153,7 +155,9 @@ const ChatBox = ({ senderId, recipientId, status }: ChatBoxProps) => {
     try {
       setLoading(true);
       const { data } = await axiosInstance.get(
-        `/message/conversation/${conversationId}?page=${page + 1}`
+        `/message/conversation/${conversationId}?userId=${user.id}&page=${
+          page + 1
+        }`
       );
       setMessages([...data.messages.reverse(), ...messages]);
       setTotalPages(data?.pagination.totalPages);

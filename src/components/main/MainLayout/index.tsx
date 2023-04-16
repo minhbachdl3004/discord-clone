@@ -51,7 +51,9 @@ const MainLayout = () => {
   }, []);
 
   if (!userToken) {
-    navigate("/login");
+    console.log("no userToken");
+    navigate("/");
+    return null;
   }
 
   if (loading) {

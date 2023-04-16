@@ -36,7 +36,6 @@ function App() {
       <div className="App w-screen h-screen bg-black">
         <Routes>
           <Route path="/" element={<Login />} />
-          <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/channels/@me" element={<MainLayout />}>

@@ -260,7 +260,7 @@ const LogoutComponent = () => {
   const navigate = useNavigate();
   const handleLogout = () => {
     logout();
-    navigate("/login");
+    navigate("/");
   };
   return (
     <div className="" role="button" onClick={handleLogout}>
