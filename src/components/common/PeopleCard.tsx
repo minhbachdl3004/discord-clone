@@ -72,7 +72,7 @@ export const PeopleCard = ({
             </div>
           </div>
           <div className="flex box-border mx-[8px] gap-[10px]">
-            {icons.map((icon, i) => (
+            {icons.map((icon : any, i) => (
               <CustomTooltip
                 key={i}
                 title={

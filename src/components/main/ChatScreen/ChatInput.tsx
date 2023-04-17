@@ -70,7 +70,7 @@ const ChatInput = ({
             <>
               <ul className="flex gap-[24px] mb-[2px] px-[10px] pb-[10px] list-none overflow-x-auto">
                 {images.map((image, i) => (
-                  <li className="flex-col inline-flex justify-center items-center bg-[#2b2d31] rounded-[4px] p-[8px] min-w-[200px] max-w-[200px] min-h-[200px] max-h-[200px] list-none relative">
+                  <li key={i} className="flex-col inline-flex justify-center items-center bg-[#2b2d31] rounded-[4px] p-[8px] min-w-[200px] max-w-[200px] min-h-[200px] max-h-[200px] list-none relative">
                     <div className="flex h-full flex-col">
                       <div className="flex justify-center h-full box-border mt-auto min-h-0">
                         <img

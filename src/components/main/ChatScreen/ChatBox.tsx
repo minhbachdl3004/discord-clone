@@ -30,7 +30,7 @@ interface ChatBoxProps {
 }
 
 const ChatBox = ({ senderId, recipientId, status }: ChatBoxProps) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const { conversationId } = useParams();
   const [message, setMessage] = useState<ChatMessageProps>({
     _id: "",
@@ -59,6 +59,7 @@ const ChatBox = ({ senderId, recipientId, status }: ChatBoxProps) => {
   const lastMessageRef = useRef<HTMLDivElement>(null);
   const divRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+
   console.log(socket);
   console.log(page, messages);
 
@@ -136,14 +137,13 @@ const ChatBox = ({ senderId, recipientId, status }: ChatBoxProps) => {
       try {
         setLoading(true);
         const { data } = await axiosInstance.get(
-          `/message/conversation/${conversationId}/user=${user.id}?page=1`
+          `/message/conversation/${conversationId}?userId=${user.id}&page=1`
         );
         socketRef.current.emit("join room", conversationId);
         setMessages(data.messages.reverse());
         setTotalPages(data?.pagination.totalPages);
       } catch (error) {
         console.log(error);
-        navigate('/channels/@me')
       }
       setLoading(false);
     };

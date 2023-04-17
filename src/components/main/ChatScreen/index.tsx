@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { axiosInstance } from "@/configs/axios";
 import useUserStore from "@/store/userStore";
 import { Helmet } from "react-helmet";
@@ -7,34 +7,37 @@ import UserProfile from "./UserProfile";
 import NavbarChat from "@/components/main/FriendScreen/NavbarChat";
 import ChatBox from "./ChatBox";
 
-interface Props {
-  userId: any;
-}
-
-export const ChatScreen = ({ userId }: Props) => {
+export const ChatScreen = () => {
+  const navigate = useNavigate();
   const { conversationId } = useParams();
   const [conversation, setConversation] = useState<any>();
   const [recipient, setRecipient] = useState<any>();
   const [showProfile, setShowProfile] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<any>("");
   const user = useUserStore((store) => store.user);
 
   useEffect(() => {
     const getConversation = async () => {
       try {
+        setLoading(true)
         const { data } = await axiosInstance.get(
-          `conversation/conversations?conversationId=${conversationId}`
+          `conversation/conversations?conversationId=${conversationId}&userId=${user.id}`
         );
-        const conversationBySender = data.filter(
-          (conversation: any) => conversation?.recipient._id !== user.id
-        );
-        setConversation(conversationBySender[0]);
+        setConversation(data[0]);
       } catch (error) {
+        setError(error);
         console.log(error);
       }
+      setLoading(false)
     };
     getConversation();
   }, [user?.id, conversationId]);
 
+  if (error) {
+    navigate('/channels/@me')
+  }
+  
   useEffect(() => {
     const getRecipientInfo = async () => {
       try {
@@ -62,7 +65,7 @@ export const ChatScreen = ({ userId }: Props) => {
   return (
     <>
       <Helmet>
-        <title>{`Discord | ${conversation?.recipient.username}`}</title>
+        <title>Discord {loading ? `Clone`: `| ${conversation?.recipient.username}`}</title>
       </Helmet>
       <main className="relative flex flex-col min-w-0 max-w-full box-border overflow-hidden z-0 flex-grow bg-bgScreen flex-auto">
         <NavbarChat
