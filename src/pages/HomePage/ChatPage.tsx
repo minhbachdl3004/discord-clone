@@ -5,8 +5,6 @@ import useUserStore from "@/store/userStore";
 import { ChatScreen } from "@/components/main/ChatScreen";
 
 const HomePage = () => {
-  const { userId } = useParams();
-
   const navigate = useNavigate();
 
   const loadFromToken = useUserStore((state) => state.loadFromToken);
@@ -23,7 +21,7 @@ const HomePage = () => {
 
   return (
     <div className="w-full max-w-full h-full flex flex-row flex-auto relative items-stretch">
-      <ChatScreen userId={userId} />
+      <ChatScreen />
     </div>
   );
 };
