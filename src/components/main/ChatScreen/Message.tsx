@@ -187,7 +187,6 @@ const Message = ({
     year: "numeric",
   });
   const flexDirection = "flex-row";
-  // console.log(isContinue);
 
   return (
     <>

@@ -83,7 +83,6 @@ export const ChangeProfileModal = ({
       setToken(response?.data.accessToken);
       socketRef.current.emit("update profile", response?.data.updateProfile);
     } catch (error: any) {
-      console.log(error);
       setError(error);
     }
     setLoading(false);

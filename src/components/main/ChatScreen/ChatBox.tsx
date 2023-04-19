@@ -59,16 +59,13 @@ const ChatBox = ({ senderId, recipientId, status }: ChatBoxProps) => {
   const lastMessageRef = useRef<HTMLDivElement>(null);
   const divRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-
-  console.log(socket);
-  console.log(page, messages);
+  const fileInputRef = useRef<any>(null);
 
   const handleEmojiSelect = (emoji: any) => {
     setMessage((prevState) => ({
       ...prevState,
       message: prevState.message + emoji.native,
     }));
-    console.log(emoji);
   };
 
   const handleInput = (event: any) => {
@@ -77,6 +74,22 @@ const ChatBox = ({ senderId, recipientId, status }: ChatBoxProps) => {
       message: event.target.value,
     }));
   };
+
+  const handleClick = () => {
+    fileInputRef.current?.click();
+  };
+
+  const handleUploadFile = (event: any) => {
+    const image = new Image();
+    image.src = URL.createObjectURL(event.target.files[0]);
+    setImages([...images, { id: files.length, src: image.src }]);
+    setFiles([...files, { id: files.length, File: event.target.files[0] }]);
+    setMessage((prevState) => ({
+      ...prevState,
+      images: [...files, { id: files.length, File: event.target.files[0] }],
+    }));
+  };
+  console.log(files);
 
   const handlePaste = (event: React.ClipboardEvent<HTMLTextAreaElement>) => {
     const items = event.clipboardData?.items;
@@ -89,7 +102,6 @@ const ChatBox = ({ senderId, recipientId, status }: ChatBoxProps) => {
             const image = new Image();
             image.onload = () => {
               // Do something with the image here
-              console.log("Image loaded", image.width, image.height);
             };
             image.src = URL.createObjectURL(blob);
             const newId = images.length;
@@ -99,7 +111,6 @@ const ChatBox = ({ senderId, recipientId, status }: ChatBoxProps) => {
               ...prevState,
               images: [...files, { id: newId, File: blob }],
             }));
-            console.log(blob?.name);
           }
         }
       }
@@ -142,9 +153,7 @@ const ChatBox = ({ senderId, recipientId, status }: ChatBoxProps) => {
         socketRef.current.emit("join room", conversationId);
         setMessages(data.messages.reverse());
         setTotalPages(data?.pagination.totalPages);
-      } catch (error) {
-        console.log(error);
-      }
+      } catch (error) {}
       setLoading(false);
     };
     fetchMessages();
@@ -161,9 +170,7 @@ const ChatBox = ({ senderId, recipientId, status }: ChatBoxProps) => {
       );
       setMessages([...data.messages.reverse(), ...messages]);
       setTotalPages(data?.pagination.totalPages);
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
     setLoading(false);
     setPage(page + 1);
   };
@@ -195,7 +202,6 @@ const ChatBox = ({ senderId, recipientId, status }: ChatBoxProps) => {
         for (let i = 0; i < message.images.length; i++) {
           formData.append("images", message.images[i].File);
         }
-        console.log(formData);
         setMessage((prevState) => ({
           ...prevState,
           message: "",
@@ -214,9 +220,7 @@ const ChatBox = ({ senderId, recipientId, status }: ChatBoxProps) => {
         socketRef.current.emit("send message", data);
         setMessages((prevMessages) => [...prevMessages, data]);
       }
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   useEffect(() => {
@@ -259,10 +263,7 @@ const ChatBox = ({ senderId, recipientId, status }: ChatBoxProps) => {
     const file = event.dataTransfer.files[0];
 
     const image = new Image();
-    image.onload = () => {
-      // Do something with the image here
-      console.log("Image loaded", image.width, image.height);
-    };
+    image.onload = () => {};
     image.src = URL.createObjectURL(file);
     const newId = images.length;
     setImages([...images, { id: newId, src: image.src }]);
@@ -311,6 +312,9 @@ const ChatBox = ({ senderId, recipientId, status }: ChatBoxProps) => {
           file={files}
           handleDrop={handleDrop}
           handleDrag={(event: any) => event.preventDefault()}
+          handleUploadFile={handleUploadFile}
+          handleClick={handleClick}
+          fileInputRef={fileInputRef}
         />
       </form>
     </div>

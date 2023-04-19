@@ -27,7 +27,6 @@ export const ChatScreen = () => {
         setConversation(data[0]);
       } catch (error) {
         setError(error);
-        console.log(error);
       }
       setLoading(false)
     };
@@ -46,13 +45,10 @@ export const ChatScreen = () => {
         );
         setRecipient(data);
       } catch (error) {
-        console.log(error);
       }
     };
     getRecipientInfo();
   }, [conversation?.recipient._id]);
-
-  console.log(recipient);
 
   useEffect(() => {
     useUserStore.setState({ recipientId: conversation?.recipient._id });

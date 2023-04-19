@@ -95,7 +95,6 @@ export const RequestCard = ({
       socketRef.current.emit("remove request", friendRequest);
       socketRef.current.emit("receive conversations", response.data);
     } catch (error) {
-      console.log(error);
     }
   };
 
@@ -111,7 +110,6 @@ export const RequestCard = ({
       socketRef.current.emit("remove request", friendRequest);
       updateRequestList(friendRequest._id)
     } catch (error) {
-      console.log(error);
     }
   };
 

@@ -45,7 +45,6 @@ const ChatList = ({ userId }: Props) => {
   const socketRef = useRef<typeof socket>(socket);
   const conversationList = useUserStore((store) => store.conversationList)
   const setConversationList = useUserStore((store) => store.setConversationList)
-  console.log(conversationList);
   
   useEffect(() => {
     if (containerRef.current) {
@@ -69,10 +68,8 @@ const ChatList = ({ userId }: Props) => {
       const response = await axiosInstance.get(
         `conversation/conversations/all?userId=${userId}`
       );
-      console.log(response.data);
       setConversationList(response.data);
     } catch (error) {
-      console.log(error);
     }
   };
 
@@ -84,7 +81,6 @@ const ChatList = ({ userId }: Props) => {
       socketRef.current.disconnect();
     };
   }, [userId]);
-  console.log(conversationList);
 
   useEffect(() => {
     socketRef.current.on("conversation responsed", (newConversation: any) => {
@@ -99,7 +95,6 @@ const ChatList = ({ userId }: Props) => {
 
   useEffect(() => {
     socketRef.current.on("profile updated", (newProfile: any) => {
-      console.log(newProfile);
       getConversation();
     });
 
@@ -107,7 +102,6 @@ const ChatList = ({ userId }: Props) => {
       socketRef.current.disconnect();
     };
   }, [socketRef]);
-  console.log(conversationList);
 
   return (
     <>

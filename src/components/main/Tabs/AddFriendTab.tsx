@@ -53,7 +53,6 @@ export const TabAddFriend = ({ userId }: userId) => {
       setMessage(response.data.message)
     } catch (error: any) {
       setError(error);
-      console.log(error);
     }
     formRef.current?.reset();
   };

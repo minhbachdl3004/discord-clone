@@ -9,7 +9,6 @@ import useUserStore from "@/store/userStore";
 
 const ResetPassword = () => {
   const resetToken = window.location.hash.split('#')[1];
-  console.log(resetToken);
   const formRef = useRef<HTMLFormElement>(null);
   const [password, setPassword] = useState<string>("");
   const [hiddenPassword, setHiddenPassword] = useState<Boolean>(false);

@@ -17,7 +17,6 @@ export const UsernameComponent = ({
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const user = useUserStore((store) => store.user);
-  console.log(open);
 
   return (
     <div className="flex flex-row justify-between box-border">

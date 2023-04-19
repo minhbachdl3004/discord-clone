@@ -14,8 +14,6 @@ axiosInstance.interceptors.request.use((config: any) => {
   };
   const method = config.method?.toUpperCase();
 
-  console.log(`${method?.toUpperCase()} REQUEST ${config.url}`, config);
-
   return config;
 });
 
@@ -25,7 +23,6 @@ axiosInstance.interceptors.response.use(
       config: { method, url },
       data,
     } = response;
-    console.log(`${method?.toUpperCase()} RESPONSE DATA ${url}`, data);
     return response;
   },
   (error) => {
@@ -33,9 +30,6 @@ axiosInstance.interceptors.response.use(
       config: { method, url },
       data,
     } = error.response;
-
-    console.log(`${method.toUpperCase()} RESPONSE ERROR ${url}`, data);
-    
 
     if (["Token is not valid!"].includes(data)) {
       localStorage.removeItem("token");

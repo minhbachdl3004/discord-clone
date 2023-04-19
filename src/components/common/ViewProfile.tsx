@@ -22,12 +22,10 @@ const ViewProfile = () => {
 
   const handleFileInputChange = async (event: any) => {
     const file = event.target.files[0];
-    console.log(file); // This will log the selected file object to the console
     const formData = {
       userId: user.id,
       avatar: file,
     };
-    console.log(formData);
 
     try {
       setLoading(true);
@@ -39,7 +37,6 @@ const ViewProfile = () => {
       setToken(response?.data.accessToken);
       socketRef.current.emit("update profile", response?.data.updateProfile);
     } catch (error) {
-      console.log(error);
     }
     setLoading(false);
   };

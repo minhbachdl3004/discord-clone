@@ -37,13 +37,10 @@ const ChatHeader = ({ status }: { status: string }) => {
         );
         setRecipient(data);
       } catch (error) {
-        console.log(error);
       }
     };
     getUserInfo();
   }, [recipientId]);
-
-  console.log(recipient?.avatar);
 
   return (
     <div className="m-[16px] flex flex-col justify-end">

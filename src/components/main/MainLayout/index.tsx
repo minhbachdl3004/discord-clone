@@ -19,10 +19,8 @@ const MainLayout = () => {
       const response = await axiosInstance.get(
         `conversation/conversations/all?userId=${user?.id}`
       );
-      console.log(response.data);
       setConversationList(response.data);
     } catch (error) {
-      console.log(error);
     }
     setLoading(false);
   };
@@ -51,7 +49,6 @@ const MainLayout = () => {
   }, []);
 
   if (!userToken) {
-    console.log("no userToken");
     navigate("/");
     return null;
   }

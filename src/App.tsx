@@ -20,9 +20,6 @@ function App() {
   useEffect(() => {
     loadFromToken();
   }, []);
-  console.log(loadFromToken());
-
-  console.log(loadingFromToken);
 
   if (loadingFromToken) {
     return (

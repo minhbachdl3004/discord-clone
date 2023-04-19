@@ -44,13 +44,11 @@ const LoginForm = () => {
       setMessage("");
       setLoading(true);
       const response = await axiosInstance.post("auth/login", newUser);
-      console.log(response.data);
       setToken(response?.data.accessToken);
       setMessage("Login successful!");
       setStatus("success");
       navigate("/channels/@me");
     } catch (error: any) {
-      console.log(error);
       setMessage(error);
       setStatus("error");
     }
@@ -70,7 +68,6 @@ const LoginForm = () => {
       setLoading(true)
       const response = await axiosInstance.post('/user/reset-password', formData)
     } catch (error) {
-      console.log(error);
     }
     setOpenPopup(true)
     setLoading(false)

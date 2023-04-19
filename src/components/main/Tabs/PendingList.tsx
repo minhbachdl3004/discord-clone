@@ -59,7 +59,6 @@ const PendingList = () => {
         socketRef.current.emit("join app", user?.id);
         setListRequests(response.data);
       } catch (error) {
-        console.log(error);
       }
     };
     getFriendRequests();
