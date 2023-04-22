@@ -10,6 +10,7 @@ import ChatHeader from "./ChatHeader";
 import Message from "./Message";
 import ChatInput from "./ChatInput";
 import { socketUrl } from "@/components/main/MainLayout";
+import SendIcon from '@mui/icons-material/Send';
 
 interface ChatMessageProps {
   _id: string;
