@@ -125,7 +125,7 @@ const RegisterForm = () => {
         <SwitchLink
           text="Already have an Account?"
           message="Login"
-          link="login"
+          link=""
         />
       </div>
     </div>
