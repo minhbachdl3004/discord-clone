@@ -146,7 +146,7 @@ const LoginForm = () => {
         <img
           src="https://streamersplaybook.com/wp-content/uploads/2022/10/image.png"
           alt=""
-          className="w-full h-[260px] rounded-[4px] object-cover pt-[30px]"
+          className="w-full h-[260px] rounded-[4px] object-cover pt-[30px] bg-none"
         />
       </div>
     </div>
