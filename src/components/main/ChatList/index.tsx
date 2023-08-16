@@ -36,15 +36,11 @@ interface Recipient {
 
 const ChatList = ({ userId }: Props) => {
   const { conversationId } = useParams();
-  const [items, setItems] = useState<ListItem[]>(list);
-  const [selectedItem, setSelectedItem] = useState<any>(conversationId);
   const [showScrollbar, setShowScrollbar] = useState<boolean>(false);
-  // const [conversationList, setConversationList] = useState<any[]>([]);
+  const [conversationList, setConversationList] = useState<any[]>([]);
   const containerRef = useRef(null);
   const socket = useUserStore((store) => store.socket);
   const socketRef = useRef<typeof socket>(socket);
-  const conversationList = useUserStore((store) => store.conversationList)
-  const setConversationList = useUserStore((store) => store.setConversationList)
   
   useEffect(() => {
     if (containerRef.current) {
@@ -70,6 +66,8 @@ const ChatList = ({ userId }: Props) => {
       );
       setConversationList(response.data);
     } catch (error) {
+      console.log(error);
+      
     }
   };
 
@@ -84,8 +82,7 @@ const ChatList = ({ userId }: Props) => {
 
   useEffect(() => {
     socketRef.current.on("conversation responsed", (newConversation: any) => {
-      const newConversationList = [...conversationList, newConversation]
-      setConversationList(newConversationList);
+      setConversationList((prevList) => [...prevList, newConversation]);
     });
 
     return () => {

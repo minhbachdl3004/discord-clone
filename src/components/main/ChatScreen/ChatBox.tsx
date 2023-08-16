@@ -90,7 +90,6 @@ const ChatBox = ({ senderId, recipientId, status }: ChatBoxProps) => {
       images: [...files, { id: files.length, File: event.target.files[0] }],
     }));
   };
-  console.log(files);
 
   const handlePaste = (event: React.ClipboardEvent<HTMLTextAreaElement>) => {
     const items = event.clipboardData?.items;
